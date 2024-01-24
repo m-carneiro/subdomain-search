@@ -22,9 +22,13 @@ def create_csv_file(file_name, value):
     file = open(file_name + '.csv', '+a')
     file.write(value + ',')
 
+    print('Created subdomains.csv on the directory')
+
 def create_txt_file(file_name, value):
     file = open(file_name + '.txt', '+a')
     file.write(value + '\n')
+
+    print('Created subdomains.txt on the directory')
 
 def extract_all_subdomains(res):
     soup = BeautifulSoup(res, 'html.parser')
