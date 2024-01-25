@@ -1,6 +1,6 @@
 import sys
 import os
-from subdomain_search import show_all_subdomains
+from subdomain_search import create_all_files, show_all_subdomains
 
 def main():        
     s = f"""
@@ -12,22 +12,39 @@ def main():
     @Author: @m-carneiro
     {'-'*40}
     """
-    if sys.argv[1] == '-s' or sys.argv[1] == '--subdomain':     
+
+    if sys.argv[1] == '-s' or sys.argv[1] == '--subdomain':
         print(s)
         website = str(sys.argv[2])
         if website == "":
             print('You need to specify a website after the flag -s or --subdomain')
             sys.exit(1)
-        
+               
         if website.startswith('http://'):
             website = website.replace('http://', '')
             sub_list = show_all_subdomains(website)
             for sub in sub_list:
                 print('& ->' + sub)
-            
+                
         sub_list = show_all_subdomains(website)
         for sub in sub_list:
             print('& ->  ' + sub)    
+        
+        
+    if sys.argv[1] == '-s' or sys.argv[1] == '--subdomain':
+        print(s)
+        website = str(sys.argv[2])
+        if website == "":
+            print('You need to specify a website after the flag -s or --subdomain')
+            sys.exit(1)
+            
+        if sys.argv[3] == '-f' or sys.argv[3] == '--file':
+            if website.startswith('http://'):
+                website = website.replace('http://', '')
+                create_all_files(website)
+                print('Files created successfully \n')
+            
+            create_all_files(website)    
     
     if sys.argv[1] == '-v' or sys.argv[1] == '--version':
         print('Version: 0.0.1')

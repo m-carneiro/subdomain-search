@@ -1,10 +1,7 @@
 from re import sub
 import requests as req
 from bs4 import BeautifulSoup
-import sys
 import os
-
-from model import Subdomains
 
 url = 'https://crt.sh'
 ends_with = ['.com', '.br', '.org', '.co', '.tv', '.dev', '.net']
