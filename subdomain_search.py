@@ -1,6 +1,7 @@
 from re import sub
 import requests as req
 from bs4 import BeautifulSoup
+from utils import create_csv_file, create_txt_file
 import os
 
 url = 'https://crt.sh'
@@ -11,30 +12,9 @@ def check_ends_with(website: str):
         if website.endswith(statement):
             return True
             
-def make_api_call(url, website):
+def make_cert_api_call(url, website):
     response = req.get(f'{url}/?q={website}')
     return response.text
-
-
-def create_html_file(file_name, value):
-    with open(file_name + '.html', "w", encoding="utf-8") as f:
-        f.write(value)
-
-def create_csv_file(file_name: str, subdomains: list[str]):
-    open(file_name + '.csv', '+w')
-    
-    file = open(file_name + '.csv', '+a')
-    for sub in subdomains:
-        file.write(sub + ',')
-    file.close()
-
-def create_txt_file(file_name: str, subdomains: list[str]):
-    open(file_name + '.txt', '+w')
-    
-    file = open(file_name + '.txt', '+a')
-    for sub in subdomains:
-        file.write(sub + '\n')
-    file.close()
 
 def extract_all_subdomains(res):
     soup = BeautifulSoup(res, 'html.parser')
@@ -64,7 +44,7 @@ def check_duplicates(subdomains):
     return unitary_subs
 
 def show_all_subdomains(website):
-    res = make_api_call(url, website)
+    res = make_cert_api_call(url, website)
     subdomains_with_duplicates = extract_all_subdomains(res)
     subdomains = check_duplicates(subdomains_with_duplicates)
     
@@ -72,7 +52,7 @@ def show_all_subdomains(website):
 
 
 def create_all_files(website):
-    res = make_api_call(url, website)
+    res = make_cert_api_call(url, website)
     subdomains_with_duplicates = extract_all_subdomains(res)
     subdomains = check_duplicates(subdomains_with_duplicates)
 

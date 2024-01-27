@@ -1,5 +1,6 @@
 *.csv
 *.html
+*.txt
 
 .vscode/
 .env
