@@ -2,7 +2,7 @@
 *.html
 *.txt
 
-.vscode/
+/.vscode/
 .env
 
 __pycache__/
