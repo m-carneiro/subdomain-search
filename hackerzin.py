@@ -32,7 +32,6 @@ def main():
         
         
     if sys.argv[1] == '-s' or sys.argv[1] == '--subdomain':
-        print(s)
         website = str(sys.argv[2])
         if website == "":
             print('You need to specify a website after the flag -s or --subdomain')

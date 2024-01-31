@@ -48,6 +48,11 @@ def show_all_subdomains(website):
     subdomains_with_duplicates = extract_all_subdomains(res)
     subdomains = check_duplicates(subdomains_with_duplicates)
     
+    for i in subdomains:
+        if i.startswith('*'):
+            print(i)
+            subdomains.remove(i)
+            
     return subdomains
 
 

@@ -1,6 +1,5 @@
+from math import log
 import socket
-import subprocess
-from uu import Error
 
 import nmap
 
@@ -22,20 +21,28 @@ def get_ports_on_a_domain(domain: str, port: int):
         return False
     
 def use_nmap_instead():
-    nmScan = nmap.PortScanner()
+    nmps = nmap.PortScanner()
     for host in subdomains:
-        print('Host : %s (%s)' % (host, nmScan[host].hostname()))
-        print('State : %s' % nmScan[host].state())
-        for proto in nmScan[host].all_protocols():
-            print('----------')
-            print('Protocol : %s' % proto)
+        try:
+            print(f'Scanning {host}...')
+            result = nmps.scan(host, '1-65353')
+            print(result)
+            print('-' * 30)
+        except Exception as e:
+            log({e}) # type: ignore
         
-            lport = nmScan[host][proto].keys()
-            lport.sort()
-            for port in lport:
-                print('port : %s\tstate : %s' % (port, nmScan[host][proto][port]['state']))
+#         print('Host : %s (%s)' % (host, nmScan[host].hostname()))
+#         print('State : %s' % nmScan[host].state())
+#         for proto in nmScan[host].all_protocols():
+#             print('----------')
+#             print('Protocol : %s' % proto)
+        
+#             lport = nmScan[host][proto].keys()
+#             lport.sort()
+#             for port in lport:
+#                 print('port : %s\tstate : %s' % (port, nmScan[host][proto][port]['state']))
 
-# for domain in subdomains:
+# # for domain in subdomains:
 #     print(f'Scanning {domain}...')
 #     for port in ports:
 #         if get_ports_on_a_domain(domain, port):

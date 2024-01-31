@@ -53,5 +53,5 @@ def append_it(subdomain: str, value: str):
     for line in lines:
         if line.strip() == subdomain:
             file.write(line.strip() + ' is reachable' + '\n')   #check if it's reachable
-            file.write(line.strip() + value + '\n')             #check if it has a valid response
+            file.write(value + '\n')                            #check if it has a valid response
     file.close()
