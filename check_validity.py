@@ -35,4 +35,3 @@ for sub in subdomains:
             is_ok = make_api_call(sub)
             message = show_better_messages(is_ok, sub)
             append_it(sub, message)
-
